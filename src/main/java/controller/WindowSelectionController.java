@@ -1,17 +1,19 @@
 package controller;
 
-import repository.DefectRepository;
-import view.GlassControlView;
-import view.WindowSelectionView;
+import data.GlassType;
+import view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WindowSelectionController {
     private WindowSelectionView windowSelectionView;
+    private ViewFactory viewFactory;
 
-    public WindowSelectionController(WindowSelectionView windowSelectionView) {
+
+    public WindowSelectionController(WindowSelectionView windowSelectionView, ViewFactory viewFactory) {
         this.windowSelectionView = windowSelectionView;
+        this.viewFactory = viewFactory;
         addActions();
     }
     private void addActions() {
@@ -34,13 +36,16 @@ public class WindowSelectionController {
     }
 
     private void actionWindScreen() {
-        GlassControlView view = new GlassControlView();
-        GlassControlController glassControlController = new GlassControlController(view, new DefectRepository());
+        viewFactory.createGlassControl(GlassType.WS);
+        windowSelectionView.dispose();
+
 
     }
 
     private void actionRoofLight() {
-        GlassControlView view = new GlassControlView();
-        GlassControlController glassControlController = new GlassControlController(view, new DefectRepository());
+        viewFactory.createGlassControl(GlassType.RL);
+        windowSelectionView.dispose();
+
+
     }
 }

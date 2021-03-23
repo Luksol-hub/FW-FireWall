@@ -12,8 +12,14 @@ import java.util.List;
 
 public class Launcher {
     public static void main(String[] args) {
-        ViewFactory viewFactory = new ViewFactory();
-        viewFactory.createWindowSelection();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ViewFactory viewFactory = new ViewFactory();
+                viewFactory.createWindowSelection();
+            }
+        });
+
 
     }
 }

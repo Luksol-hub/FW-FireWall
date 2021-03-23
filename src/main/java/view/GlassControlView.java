@@ -7,72 +7,92 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
 
 
-public class GlassControlView extends View {
+public class GlassControlView extends View implements MouseListener {
 
     private JButton okButton = new JButton("OK");
     private JButton nokButton = new JButton("NOK");
     private JButton repairButton = new JButton("Przeróbka");
     private JButton backButton = new JButton("Cofnij");
+//    private Color c = Color.BLUE;
 
     private JPanel panel = new JPanel(null);
     private DefaultListModel<Defect> defects = new DefaultListModel<>();
-    JComboBox<DefectCategory> categorySelector = new JComboBox<>(DefectCategory.values());
+    private JComboBox<DefectCategory> categorySelector = new JComboBox<>(DefectCategory.values());
+    private GlassView glassView;
 
-    public GlassControlView() throws HeadlessException {
+
+
+    public GlassControlView(GlassView glassView) throws HeadlessException {
         super("kontrola szyby", 600, 600);
+        this.glassView = glassView;
         initView();
+
     }
 
     @Override
     void initComponents() {
+        add(panel);
+        panel.setBounds(0,0,600,600);
         initGoodGlass();
         initDamageGlassButton();
         initProcessingButton();
         initBackButton();
-        glassView();
         initList();
         initCategorySelector();
         comboBoxTest(); // TODO remove
+        initGlassView();
+
+
     }
 
     private void initGoodGlass() {
         panel.add(okButton);
         okButton.setBounds(450, 420, 100, 100);
         okButton.repaint();
-        add(panel);
+
     }
 
     private void initDamageGlassButton() {
         panel.add(nokButton);
         nokButton.setBounds(350, 420, 100, 100);
         nokButton.repaint();
-        add(panel);
     }
 
     private void initProcessingButton() {
         panel.add(repairButton);
         repairButton.setBounds(250, 420, 100, 100);
         repairButton.repaint();
-        add(panel);
     }
 
     private void initBackButton() {
         panel.add(backButton);
         backButton.setBounds(50, 420, 100, 100);
         backButton.repaint();
-        add(panel);
+
     }
 
-    private void glassView() {
-        JButton jButton4 = new JButton("obraz szyby");
-        panel.add(jButton4);
-        jButton4.setBounds(250, 50, 300, 300);
-        jButton4.repaint();
-        add(panel);
+    public void initGlassView()  {
+
+//        panel.add(glassView);
+        panel.add(new GlassViewV2Rl(this));
+        glassView.setBounds(0,0, 600,600);
+
+       // panel.repaint();
     }
+
+//    public void initDefectPoint() {
+//        panel.add(glassView);
+//        glassView.setBounds(300, 115, 200, 170);
+////        defectPointView.setBackground(c);
+//
+//        panel.repaint();
+//    }
 
     private void initList() {
        JList<Defect> defectList = new JList<>();
@@ -121,11 +141,42 @@ public class GlassControlView extends View {
     }
 
     public void addActionBack(ActionListener actionListener) {
-        System.out.println("Cofnij");
         backButton.addActionListener(actionListener);
     }
 
     public void addActionSelection(ActionListener actionListener5) {
         categorySelector.addActionListener(actionListener5);
     }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("Click on glass control");
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+
+
+
 }
+
+

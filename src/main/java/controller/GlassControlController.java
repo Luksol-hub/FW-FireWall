@@ -1,9 +1,10 @@
 package controller;
 
 import data.DefectCategory;
-import data.DefectCsvLoader;
 import repository.DefectRepository;
 import view.GlassControlView;
+import view.GlassView;
+import view.ViewFactory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,11 +12,16 @@ import java.awt.event.ActionListener;
 public class GlassControlController {
     private GlassControlView glassControlView;
     private DefectRepository defectRepository;
+    private ViewFactory viewFactory;
+    private GlassView glassView;
 
 
-    public GlassControlController(GlassControlView glassControlView, DefectRepository defectRepository) {
+    public GlassControlController(GlassControlView glassControlView, DefectRepository defectRepository, ViewFactory viewFactory, GlassView glassView) {
         this.glassControlView = glassControlView;
         this.defectRepository = defectRepository;
+        this.viewFactory = viewFactory;
+        this.glassView = glassView;
+
         addActions();
         updateDefects(DefectCategory.FLOAT);
     }
@@ -50,6 +56,7 @@ public class GlassControlController {
                 updateDefects(glassControlView.selectedCategory());
             }
         };
+
         glassControlView.addActionOk(actionListener);
         glassControlView.addActionNok(actionListener2);
         glassControlView.addActionRepair(actionListener3);
@@ -65,13 +72,12 @@ public class GlassControlController {
 
     public void actionRepair() { System.out.println("Przeróbka");}
 
-    public void actionBack() { System.out.println("Cofnij");
-
-            glassControlView.setVisible(false);
-
+    public void actionBack() {
+            glassControlView.dispose();
+            viewFactory.createWindowSelection();
     }
-
     public void updateDefects(DefectCategory category) {
         glassControlView.setDefects(defectRepository.findDefectsByCategory(category));
     }
+
 }
