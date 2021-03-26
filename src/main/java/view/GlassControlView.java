@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -79,8 +78,8 @@ public class GlassControlView extends View implements MouseListener {
 
     public void initGlassView()  {
 
-//        panel.add(glassView);
-        panel.add(new GlassViewV2Rl(this));
+        panel.add(glassView);
+//        panel.add(new GlassViewRl(this));
         glassView.setBounds(0,0, 600,600);
 
        // panel.repaint();

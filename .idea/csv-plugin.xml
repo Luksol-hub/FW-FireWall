@@ -45,6 +45,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\main\java\jdbc\DemoJdbc.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\main\java\view\DefectPointView.java">
           <value>
             <Attribute>
@@ -60,6 +67,20 @@
           </value>
         </entry>
         <entry key="\src\main\java\view\GlassView.java">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\main\java\view\GlassViewV2.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\main\java\view\GlassViewV2Ws.java">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -12,8 +12,10 @@ public class ViewFactory {
     public void createGlassControl(GlassType glassType) {
         GlassView glassView = createGlassView(glassType);
         GlassControlView view = new GlassControlView(glassView);
+        glassView.setMotherComponent(view);
         GlassControlController glassControlController = new GlassControlController(view, new DefectRepository(), this, glassView);
     }
+
 
     private GlassView createGlassView(GlassType glassType) {
         switch (glassType) {

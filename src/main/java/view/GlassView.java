@@ -7,59 +7,81 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GlassView extends JPanel implements MouseListener {
-    private List<Rectangle> circles = new ArrayList<>();
+   public abstract class GlassView extends JPanel implements MouseListener {
+        private List<Rectangle> circles = new ArrayList<>();
+        private JFrame motherComponent;
 
-    public GlassView() {
-        setSize(800,800);
-        addMouseListener(this);
-    }
+        public GlassView() {
+            setSize(800,800);
+            addMouseListener(this);
 
-    abstract void paintGlass(Graphics g);
+        }
 
-    @Override
-    public void paintComponent(Graphics g) { // template method
+       abstract void paintGlass(Graphics g);
 
-        g.setColor(Color.BLUE);
-        g.fillRect(250,50,300, 300);
-        paintGlass(g);
+   /* @Override
+    protected void paintComponent(Graphics g) {
+        g.drawRect(50, 50, 100, 100);
 
-        g.drawRect(300, 115, 200, 170);
-        g.setColor(Color.RED);
-        for (Rectangle circle : circles)
-            g.drawOval((int)circle.getX(),(int)circle.getY(),(int)circle.getWidth(),(int)circle.getHeight());
+        System.out.println("MALUJEMY");
+    }*/
 
-    }
+        @Override
+        public void paintComponent(Graphics g) {
+            g.setColor(Color.GREEN);
+            g.fillRect(250,50,300, 300);
+            g.setColor(Color.BLACK);
+            paintGlass(g);
+            g.setColor(Color.BLUE);
+            g.drawRect(300, 115, 200, 170);
+            g.setColor(Color.RED);
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("click");
-        Rectangle circle = new Rectangle(e.getX()-5, e.getY()-5, 10, 10);
-        circles.add(circle);
+            for (Rectangle circle : circles) {
+                g.drawOval((int)circle.getX(),(int)circle.getY(),(int)circle.getWidth(),(int)circle.getHeight());
+            }
+        }
 
-        repaint();
-    }
+        int counter = 0;
 
-    @Override
-    public void mousePressed(MouseEvent e) {
-        System.out.println("Test");
-    }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            counter++;
+            System.out.println("CLICK!" + counter);
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        System.out.println("Test");
-    }
+            Rectangle circle = new Rectangle(e.getX()-5, e.getY()-5, 10, 10);
+            setBackground(Color.RED);
+            circles.add(circle);
+            repaint();
+            motherComponent.repaint();
+        }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        System.out.println("Test");
+        @Override
+        public void mousePressed(MouseEvent e) {
 
-    }
+        }
 
-    @Override
-    public void mouseExited(MouseEvent e) {
-        System.out.println("Test");
+        @Override
+        public void mouseReleased(MouseEvent e) {
 
-    }
+        }
 
-}
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+
+/*    @Override
+    protected void paintChildren(Graphics g) {
+        g.drawRect(50, 50, 100, 100);
+        System.out.println("MALUJEMY3");
+    }*/
+
+       public void setMotherComponent(JFrame motherComponent) {
+           this.motherComponent = motherComponent;
+       }
+   }
