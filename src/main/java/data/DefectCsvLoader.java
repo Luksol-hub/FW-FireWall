@@ -21,9 +21,7 @@ public class DefectCsvLoader {
                 Defect windowDefect = new Defect(defectName, DefectCategory.values()[defectCategoryNumber - 1]);
                 allDefects.add(windowDefect);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
+        } catch (FileNotFoundException | URISyntaxException e ) {
             e.printStackTrace();
         }
         return allDefects;

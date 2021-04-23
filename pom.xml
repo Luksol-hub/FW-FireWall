@@ -30,6 +30,12 @@
         <artifactId>client-runtime</artifactId>
         <version>1.7.4</version>
     </dependency>
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.23</version>
+    </dependency>
+
 </dependencies>
 
 </project>
