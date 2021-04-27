@@ -1,15 +1,14 @@
-package jdbc;
+package database;
 
 import data.Defect;
 import data.DefectCategory;
 import data.SimpleDefect;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefectJdbcRepository {
+public class DefectJdbcRepository implements DefectRepository {
 
     private Connection connection;
 

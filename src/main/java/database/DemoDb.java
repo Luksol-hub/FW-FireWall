@@ -1,20 +1,37 @@
-package jdbc;
+package database;
 
 import data.Defect;
 import data.DefectCategory;
 import data.SimpleDefect;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class DemoJdbc {
+public class DemoDb {
     public static void main(String[] args) {
 
-        SimpleDefect simpleDefect = new SimpleDefect("szczerba",1,2.2);
+        SimpleDefect simpleDefect = new SimpleDefect("Malina",1,2.2);
+
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(simpleDefect);
+        // TODO: 27.04.2021 powiedzieć hibernate że może stworzyć tabele 
+        transaction.commit();
+
+//        DefectRepository repository = new DefectHibernateRepository();
+//        repository.addDefect(simpleDefect);
+    }
 
 
+/*
         try {
            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/glasses","root","MySQL");
             String createTable = """
@@ -40,5 +57,5 @@ public class DemoJdbc {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
+    }*/
 }

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DefectRepository {
+public class DefectCsvRepository {
     private List<Defect> defects = new ArrayList<>();
 
 
-    public DefectRepository() {
+    public DefectCsvRepository() {
         DefectCsvLoader defectCsvLoader = new DefectCsvLoader();
         defects.addAll(defectCsvLoader.load());
     }

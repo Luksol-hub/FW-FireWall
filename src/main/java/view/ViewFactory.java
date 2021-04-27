@@ -3,7 +3,7 @@ package view;
 import controller.GlassControlController;
 import controller.WindowSelectionController;
 import data.GlassType;
-import repository.DefectRepository;
+import repository.DefectCsvRepository;
 
 public class ViewFactory {
 
@@ -13,7 +13,7 @@ public class ViewFactory {
         GlassView glassView = createGlassView(glassType);
         GlassControlView view = new GlassControlView(glassView);
         glassView.setMotherComponent(view);
-        GlassControlController glassControlController = new GlassControlController(view, new DefectRepository(), this, glassView);
+        GlassControlController glassControlController = new GlassControlController(view, new DefectCsvRepository(), this, glassView);
     }
 
 

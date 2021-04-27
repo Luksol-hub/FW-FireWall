@@ -1,6 +1,11 @@
 package data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class SimpleDefect {
+  @Id
   private String name;
   private int category;
   private double position;
