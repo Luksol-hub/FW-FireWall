@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DemoDb {
     public static void main(String[] args) {
 
-        SimpleDefect simpleDefect = new SimpleDefect("Malina",1,2.2);
+        SimpleDefect simpleDefect = new SimpleDefect("Jabłko1234",1,2.2);
 
         Configuration configuration = new Configuration();
         configuration.configure();
@@ -23,8 +23,9 @@ public class DemoDb {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(simpleDefect);
-        // TODO: 27.04.2021 powiedzieć hibernate że może stworzyć tabele 
+        // TODO: 27.04.2021 powiedzieć hibernate że może stworzyć tabele
         transaction.commit();
+        session.close();
 
 //        DefectRepository repository = new DefectHibernateRepository();
 //        repository.addDefect(simpleDefect);

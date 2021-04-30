@@ -7,7 +7,12 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">MySQL</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
+<!--        <property name="hibernate.hbm2ddl.auto">create</property> tworzy za kazdym razem od nowa tabele-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+<!--        stara sie dostosowac tabele ale uzywa startych (nie zawsze dziala prawidlowo)-->
+<!--        <property name="hibernate.hbm2ddl.auto">validate</property> nie rusza tabel - uzywa gotowych, wywala sie przy kazdej niezgodnosci struktury-->
+<!--        <property name="hibernate.hbm2ddl.auto">create-drop</property>  do testow - kasuje po zaknieciu factory-->
         <mapping class="data.SimpleDefect" />
     </session-factory>
 </hibernate-configuration>
