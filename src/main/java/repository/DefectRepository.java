@@ -1,4 +1,4 @@
-package database;
+package repository;
 
 import data.Defect;
 import data.DefectCategory;
@@ -12,7 +12,9 @@ public interface DefectRepository {
 
      List<Defect> getDefects();
 
-     List<Defect> getDefectsByCategory(DefectCategory category);
-
      Defect getDefect( String name);
+
+     List<Defect> findDefectsByCategory(DefectCategory category);
+
+     void addDefects(List<Defect> defects);
 }

@@ -1,7 +1,7 @@
 package controller;
 
 import data.DefectCategory;
-import repository.DefectCsvRepository;
+import repository.DefectRepository;
 import view.GlassControlView;
 import view.GlassView;
 import view.ViewFactory;
@@ -11,16 +11,16 @@ import java.awt.event.ActionListener;
 
 public class GlassControlController {
     private GlassControlView glassControlView;
-    private DefectCsvRepository defectCsvRepository;
     private ViewFactory viewFactory;
     private GlassView glassView;
+    private DefectRepository defectRepository;
 
 
-    public GlassControlController(GlassControlView glassControlView, DefectCsvRepository defectCsvRepository, ViewFactory viewFactory, GlassView glassView) {
+    public GlassControlController(GlassControlView glassControlView, ViewFactory viewFactory, GlassView glassView, DefectRepository defectRepository) {
         this.glassControlView = glassControlView;
-        this.defectCsvRepository = defectCsvRepository;
         this.viewFactory = viewFactory;
         this.glassView = glassView;
+        this.defectRepository = defectRepository;
 
         addActions();
         updateDefects(DefectCategory.FLOAT);
@@ -77,7 +77,8 @@ public class GlassControlController {
             viewFactory.createWindowSelection();
     }
     public void updateDefects(DefectCategory category) {
-        glassControlView.setDefects(defectCsvRepository.findDefectsByCategory(category));
+        glassControlView.setDefects(defectRepository.findDefectsByCategory(category));
+//        glassControlView.setDefects(defectRepository.getDefects());
     }
 
 }

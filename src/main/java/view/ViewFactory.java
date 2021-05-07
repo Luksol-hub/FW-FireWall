@@ -2,18 +2,32 @@ package view;
 
 import controller.GlassControlController;
 import controller.WindowSelectionController;
+import data.Defect;
+import data.DefectCsvLoader;
 import data.GlassType;
-import repository.DefectCsvRepository;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import repository.DefectHibernateRepository;
+import repository.DefectRepository;
+
+import java.util.List;
 
 public class ViewFactory {
 
-
+//todo przerzucić do maina bazę danych
 
     public void createGlassControl(GlassType glassType) {
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        DefectRepository defectRepository = new DefectHibernateRepository(sessionFactory);
+        DefectCsvLoader defectCsvLoader = new DefectCsvLoader();
+        List<Defect> defects = defectCsvLoader.load();
+        defectRepository.addDefects(defects);
         GlassView glassView = createGlassView(glassType);
         GlassControlView view = new GlassControlView(glassView);
         glassView.setMotherComponent(view);
-        GlassControlController glassControlController = new GlassControlController(view, new DefectCsvRepository(), this, glassView);
+        GlassControlController glassControlController = new GlassControlController(view, this, glassView, defectRepository);
     }
 
 

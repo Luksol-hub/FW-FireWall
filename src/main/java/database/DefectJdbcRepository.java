@@ -3,6 +3,7 @@ package database;
 import data.Defect;
 import data.DefectCategory;
 import data.SimpleDefect;
+import repository.DefectRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -91,6 +92,16 @@ public class DefectJdbcRepository implements DefectRepository {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<Defect> findDefectsByCategory(DefectCategory category) {
+        return null;
+    }
+
+    @Override
+    public void addDefects(List<Defect> defects) {
+
     }
 
 }

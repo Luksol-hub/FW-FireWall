@@ -23,7 +23,6 @@ public class DemoDb {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(simpleDefect);
-        // TODO: 27.04.2021 powiedzieć hibernate że może stworzyć tabele
         transaction.commit();
         session.close();
 

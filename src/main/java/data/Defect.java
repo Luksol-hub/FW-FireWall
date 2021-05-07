@@ -1,8 +1,22 @@
 package data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "defects")
 public class Defect {
-   private String kind;
-   private DefectCategory defectCategory;
+    @Id
+    @GeneratedValue
+    private int id;
+    private String kind;
+    private DefectCategory defectCategory;
+
+    public Defect(){
+
+    }
 
     public Defect(String whatKindOfDefects, DefectCategory defectCategory) {
         this.kind = whatKindOfDefects;
