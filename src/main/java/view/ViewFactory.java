@@ -14,16 +14,26 @@ import java.util.List;
 
 public class ViewFactory {
 
-//todo przerzucić do maina bazę danych
+    private DefectRepository defectRepository;
 
-    public void createGlassControl(GlassType glassType) {
+    public ViewFactory() {
         Configuration configuration = new Configuration();
         configuration.configure();
         SessionFactory sessionFactory = configuration.buildSessionFactory();
-        DefectRepository defectRepository = new DefectHibernateRepository(sessionFactory);
-        DefectCsvLoader defectCsvLoader = new DefectCsvLoader();
-        List<Defect> defects = defectCsvLoader.load();
-        defectRepository.addDefects(defects);
+        defectRepository = new DefectHibernateRepository(sessionFactory);
+    }
+
+    //todo przerzucić do maina bazę danych. Wypełnia bazę danych tylko raz
+
+    public void createGlassControl(GlassType glassType) {
+
+
+        if(defectRepository.isEmpty()) {
+            DefectCsvLoader defectCsvLoader = new DefectCsvLoader();
+            List<Defect> defects = defectCsvLoader.load();
+            defectRepository.addDefects(defects);
+        }
+
         GlassView glassView = createGlassView(glassType);
         GlassControlView view = new GlassControlView(glassView);
         glassView.setMotherComponent(view);

@@ -10,6 +10,7 @@ import java.util.List;
    public abstract class GlassView extends JPanel implements MouseListener {
         private List<Rectangle> circles = new ArrayList<>();
         private JFrame motherComponent;
+        private boolean enabled;
 
         public GlassView() {
             setSize(800,800);
@@ -45,6 +46,10 @@ import java.util.List;
 
         @Override
         public void mouseClicked(MouseEvent e) {
+
+            if(!enabled){
+                return;
+            }
             counter++;
             System.out.println("CLICK!" + counter);
 
@@ -55,7 +60,12 @@ import java.util.List;
             motherComponent.repaint();
         }
 
-        @Override
+       @Override
+       public void setEnabled(boolean enabled) {
+           this.enabled = enabled;
+       }
+
+       @Override
         public void mousePressed(MouseEvent e) {
 
         }

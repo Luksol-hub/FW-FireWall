@@ -5,10 +5,7 @@ import data.DefectCategory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.List;
 
 
@@ -20,11 +17,14 @@ public class GlassControlView extends View implements MouseListener {
     private JButton backButton = new JButton("Cofnij");
 //    private Color c = Color.BLUE;
 
-    private JPanel panel = new JPanel(null);
     private DefaultListModel<Defect> defects = new DefaultListModel<>();
     private JComboBox<DefectCategory> categorySelector = new JComboBox<>(DefectCategory.values());
-    private GlassView glassView;
+    private JList<Defect> defectList = new JList<>();
 
+    private JPanel panel = new JPanel(null);
+    private JTextField modelName = new JTextField();
+    private JLabel notification = new JLabel();
+    private GlassView glassView;
 
 
     public GlassControlView(GlassView glassView) throws HeadlessException {
@@ -38,6 +38,8 @@ public class GlassControlView extends View implements MouseListener {
     void initComponents() {
         add(panel);
         panel.setBounds(0,0,600,600);
+        initModelName();
+        initNotification();
         initGoodGlass();
         initDamageGlassButton();
         initProcessingButton();
@@ -46,7 +48,6 @@ public class GlassControlView extends View implements MouseListener {
         initCategorySelector();
         comboBoxTest(); // TODO remove
         initGlassView();
-
 
     }
 
@@ -73,7 +74,6 @@ public class GlassControlView extends View implements MouseListener {
         panel.add(backButton);
         backButton.setBounds(50, 420, 100, 100);
         backButton.repaint();
-
     }
 
     public void initGlassView()  {
@@ -94,12 +94,27 @@ public class GlassControlView extends View implements MouseListener {
 //    }
 
     private void initList() {
-       JList<Defect> defectList = new JList<>();
+
         defectList.setModel(defects);
         JScrollPane scrollPane = new JScrollPane(defectList);
         panel.add(scrollPane);
         scrollPane.setBounds(50, 100, 150, 250);
         defectList.setLayoutOrientation(JList.VERTICAL);
+    }
+
+    private void initModelName() {
+        JLabel modelLabel = new JLabel("Model");
+        panel.add(modelLabel);
+        modelLabel.setBounds(50,360,100,25);
+        panel.add(modelName);
+        modelName.setBounds(50,380,150,25);
+        modelName.repaint();
+    }
+
+    private void initNotification() {
+        panel.add(notification);
+        notification.setBounds(150,10,200,25);
+        notification.repaint();
     }
 
     public void setDefects(List<Defect> newDefects) {
@@ -124,6 +139,17 @@ public class GlassControlView extends View implements MouseListener {
         categorySelector.setBounds(50, 50, 150, 30);
     }
 
+    public void lockDefectSelection() {
+        categorySelector.setEnabled(false);
+        defectList.setEnabled(false);
+    }
+
+    public void unlockDefectSelection() {
+        categorySelector.setEnabled(true);
+        defectList.setEnabled(true);
+    }
+
+
     public void addActionOk(ActionListener actionListener) {
         System.out.println("Add");
         okButton.addActionListener(actionListener);
@@ -145,6 +171,10 @@ public class GlassControlView extends View implements MouseListener {
 
     public void addActionSelection(ActionListener actionListener5) {
         categorySelector.addActionListener(actionListener5);
+    }
+
+    public void addTypeModelAction(KeyListener keyListener) {
+        modelName.addKeyListener(keyListener);
     }
 
 

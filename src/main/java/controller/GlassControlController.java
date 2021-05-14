@@ -6,13 +6,16 @@ import view.GlassControlView;
 import view.GlassView;
 import view.ViewFactory;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GlassControlController {
     private GlassControlView glassControlView;
     private ViewFactory viewFactory;
-    private GlassView glassView;
+    private GlassView glassView; // todo poprawić nazwy
     private DefectRepository defectRepository;
 
 
@@ -21,7 +24,8 @@ public class GlassControlController {
         this.viewFactory = viewFactory;
         this.glassView = glassView;
         this.defectRepository = defectRepository;
-
+        this.glassControlView.lockDefectSelection();
+        glassView.setEnabled(false); // todo ma się to wykonać dynamicznie
         addActions();
         updateDefects(DefectCategory.FLOAT);
     }
@@ -56,12 +60,29 @@ public class GlassControlController {
                 updateDefects(glassControlView.selectedCategory());
             }
         };
+        KeyListener keyListener = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+               typeModelAction();
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
 
         glassControlView.addActionOk(actionListener);
         glassControlView.addActionNok(actionListener2);
         glassControlView.addActionRepair(actionListener3);
         glassControlView.addActionBack(actionListener4);
         glassControlView.addActionSelection(actionListener5);
+        glassControlView.addTypeModelAction(keyListener);
     }
 
     public void actionOk() {
@@ -75,6 +96,10 @@ public class GlassControlController {
     public void actionBack() {
             glassControlView.dispose();
             viewFactory.createWindowSelection();
+    }
+
+    public void typeModelAction() {
+        glassControlView.unlockDefectSelection();
     }
     public void updateDefects(DefectCategory category) {
         glassControlView.setDefects(defectRepository.findDefectsByCategory(category));

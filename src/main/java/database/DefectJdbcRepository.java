@@ -104,4 +104,9 @@ public class DefectJdbcRepository implements DefectRepository {
 
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
 }

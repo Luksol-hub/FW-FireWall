@@ -17,4 +17,6 @@ public interface DefectRepository {
      List<Defect> findDefectsByCategory(DefectCategory category);
 
      void addDefects(List<Defect> defects);
+
+     boolean isEmpty();
 }

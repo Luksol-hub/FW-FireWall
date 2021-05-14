@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class DefectHibernateRepository implements DefectRepository {
@@ -59,5 +60,28 @@ public class DefectHibernateRepository implements DefectRepository {
         }
         transaction.commit();
         session.close();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        String SQL_QUERY = "SELECT COUNT(*) FROM Defect";
+        Query query = session.createQuery(SQL_QUERY);
+
+        long row = 0;
+
+        for(Iterator it = query.iterate(); it.hasNext();)
+        {
+            row = (Long) it.next();
+            System.out.print("Count: " + row);
+        }
+        session.getTransaction().commit();
+        session.close();
+        if (row != 0) {
+            return false;
+        }
+        return true;
     }
 }

@@ -108,6 +108,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\main\java\view\ViewFactory.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\main\resources\defects.csv">
           <value>
             <Attribute>
