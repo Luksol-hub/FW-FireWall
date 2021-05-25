@@ -2,15 +2,16 @@ package view;
 
 import java.awt.*;
 
-public class GlassViewWs extends GlassView {
+public class GlassPanelRl extends GlassPanel {
+
 
     @Override
     void paintGlass(Graphics g) {
-        int[] xPionts = {350,450,500,300};
-        int[] yPionts = {125,125,275,275};
+
         g.setColor(Color.BLACK);
+        int[] xPionts = {300,500,450,350};
+        int[] yPionts = {100,100,300,300};
         Polygon polygon = new Polygon(xPionts,yPionts,4);
         g.fillPolygon(polygon);
-
     }
 }

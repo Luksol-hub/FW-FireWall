@@ -1,16 +1,10 @@
 package database;
 
-import data.Defect;
-import data.DefectCategory;
-import data.SimpleDefect;
+import defects.SimpleDefect;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DemoDb {
     public static void main(String[] args) {

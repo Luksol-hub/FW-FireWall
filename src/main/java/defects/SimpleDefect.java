@@ -1,4 +1,4 @@
-package data;
+package defects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

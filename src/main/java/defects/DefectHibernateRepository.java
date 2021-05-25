@@ -1,8 +1,9 @@
-package repository;
+package defects;
 
-import data.Defect;
-import data.DefectCategory;
-import data.SimpleDefect;
+import defects.Defect;
+import defects.DefectCategory;
+import defects.DefectRepository;
+import defects.SimpleDefect;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

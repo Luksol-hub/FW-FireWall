@@ -13,7 +13,7 @@
 <!--        stara sie dostosowac tabele ale uzywa startych (nie zawsze dziala prawidlowo)-->
 <!--        <property name="hibernate.hbm2ddl.auto">validate</property> nie rusza tabel - uzywa gotowych, wywala sie przy kazdej niezgodnosci struktury-->
 <!--        <property name="hibernate.hbm2ddl.auto">create-drop</property>  do testow - kasuje po zaknieciu factory-->
-        <mapping class="data.SimpleDefect" />
-        <mapping class="data.Defect" />
+        <mapping class="defects.SimpleDefect" />
+        <mapping class="defects.Defect" />
     </session-factory>
 </hibernate-configuration>

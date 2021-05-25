@@ -1,8 +1,8 @@
-package repository;
+package defects;
 
-import data.Defect;
-import data.DefectCategory;
-import data.SimpleDefect;
+import defects.Defect;
+import defects.DefectCategory;
+import defects.SimpleDefect;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package controller;
 
-import data.GlassType;
+import defects.GlassType;
 import view.*;
 
 import java.awt.event.ActionEvent;

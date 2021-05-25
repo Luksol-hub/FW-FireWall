@@ -2,13 +2,13 @@ package view;
 
 import controller.GlassControlController;
 import controller.WindowSelectionController;
-import data.Defect;
-import data.DefectCsvLoader;
-import data.GlassType;
+import defects.Defect;
+import defects.DefectCsvLoader;
+import defects.GlassType;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import repository.DefectHibernateRepository;
-import repository.DefectRepository;
+import defects.DefectHibernateRepository;
+import defects.DefectRepository;
 
 import java.util.List;
 
@@ -34,17 +34,17 @@ public class ViewFactory {
             defectRepository.addDefects(defects);
         }
 
-        GlassView glassView = createGlassView(glassType);
-        GlassControlView view = new GlassControlView(glassView);
-        glassView.setMotherComponent(view);
-        GlassControlController glassControlController = new GlassControlController(view, this, glassView, defectRepository);
+        GlassPanel glassPanel = createGlassView(glassType);
+        GlassControlView view = new GlassControlView(glassPanel);
+        glassPanel.setMotherComponent(view);
+        GlassControlController glassControlController = new GlassControlController(view, this, glassPanel, defectRepository);
     }
 
 
-    private GlassView createGlassView(GlassType glassType) {
+    private GlassPanel createGlassView(GlassType glassType) {
         switch (glassType) {
-            case RL: return new GlassViewRl();
-            case WS: return new GlassViewWs();
+            case RL: return new GlassPanelRl();
+            case WS: return new GlassPanelWs();
             default: throw new IllegalStateException("Nie udało się dopasować kształtu szyby");
         }
     }

@@ -1,4 +1,4 @@
-package data;
+package defects;
 
 public enum DefectCategory {
     FLOAT("Wady Float"),

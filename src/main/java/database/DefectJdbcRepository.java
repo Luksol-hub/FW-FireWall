@@ -1,9 +1,9 @@
 package database;
 
-import data.Defect;
-import data.DefectCategory;
-import data.SimpleDefect;
-import repository.DefectRepository;
+import defects.Defect;
+import defects.DefectCategory;
+import defects.SimpleDefect;
+import defects.DefectRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

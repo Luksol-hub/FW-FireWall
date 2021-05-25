@@ -1,9 +1,10 @@
 package view;
 
-import data.Defect;
-import data.DefectCategory;
+import defects.Defect;
+import defects.DefectCategory;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
@@ -24,14 +25,13 @@ public class GlassControlView extends View implements MouseListener {
     private JPanel panel = new JPanel(null);
     private JTextField modelName = new JTextField();
     private JLabel notification = new JLabel();
-    private GlassView glassView;
+    private GlassPanel glassPanel;
 
 
-    public GlassControlView(GlassView glassView) throws HeadlessException {
+    public GlassControlView(GlassPanel glassPanel) throws HeadlessException {
         super("kontrola szyby", 600, 600);
-        this.glassView = glassView;
+        this.glassPanel = glassPanel;
         initView();
-
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GlassControlView extends View implements MouseListener {
         initBackButton();
         initList();
         initCategorySelector();
-        comboBoxTest(); // TODO remove
+        comboBoxTest();
         initGlassView();
 
     }
@@ -78,16 +78,16 @@ public class GlassControlView extends View implements MouseListener {
 
     public void initGlassView()  {
 
-        panel.add(glassView);
-//        panel.add(new GlassViewRl(this));
-        glassView.setBounds(0,0, 600,600);
+        panel.add(glassPanel);
+//        panel.add(new GlassPanelRl(this));
+        glassPanel.setBounds(0,0, 600,600);
 
        // panel.repaint();
     }
 
 //    public void initDefectPoint() {
-//        panel.add(glassView);
-//        glassView.setBounds(300, 115, 200, 170);
+//        panel.add(glassPanel);
+//        glassPanel.setBounds(300, 115, 200, 170);
 ////        defectPointView.setBackground(c);
 //
 //        panel.repaint();
@@ -149,7 +149,6 @@ public class GlassControlView extends View implements MouseListener {
         defectList.setEnabled(true);
     }
 
-
     public void addActionOk(ActionListener actionListener) {
         System.out.println("Add");
         okButton.addActionListener(actionListener);
@@ -171,6 +170,10 @@ public class GlassControlView extends View implements MouseListener {
 
     public void addActionSelection(ActionListener actionListener5) {
         categorySelector.addActionListener(actionListener5);
+    }
+
+    public void addActionSelectedDefect(ListSelectionListener listSelectionListener ) {
+        defectList.addListSelectionListener(listSelectionListener);
     }
 
     public void addTypeModelAction(KeyListener keyListener) {
