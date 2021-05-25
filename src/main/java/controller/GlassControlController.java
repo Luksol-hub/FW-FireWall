@@ -3,15 +3,13 @@ package controller;
 import defects.DefectCategory;
 import defects.DefectRepository;
 import view.GlassControlView;
+import view.GlassDefectView;
 import view.GlassPanel;
 import view.ViewFactory;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class GlassControlController {
     private GlassControlView glassControlView;
@@ -83,6 +81,33 @@ public class GlassControlController {
             }
         };
 
+        MouseListener mouseListener = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                glassPanelClickAction(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
+
         glassControlView.addActionOk(actionListener);
         glassControlView.addActionNok(actionListener2);
         glassControlView.addActionRepair(actionListener3);
@@ -90,6 +115,7 @@ public class GlassControlController {
         glassControlView.addActionSelection(actionListener5);
         glassControlView.addTypeModelAction(keyListener);
         glassControlView.addActionSelectedDefect(listSelectionListener);
+        glassControlView.addGlassPanelClickAction(mouseListener);
 
     }
 
@@ -109,13 +135,18 @@ public class GlassControlController {
     public void typeModelAction() {
         glassControlView.unlockDefectSelection();
     }
+
     public void updateDefects(DefectCategory category) {
         glassControlView.setDefects(defectRepository.findDefectsByCategory(category));
 //        glassControlView.setDefects(defectRepository.getDefects());
     }
-
     public void actionDefectSelected() {
         glassPanel.setEnabled(true);
     }
 
+    public void glassPanelClickAction(MouseEvent e) {
+        GlassDefectView glassDefectView = new GlassDefectView(glassControlView.selectedDefect());
+        glassPanel.addDefect(e,glassDefectView);
+        System.out.println("click controller");
+    }
 }

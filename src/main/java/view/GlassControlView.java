@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.List;
 
 
-public class GlassControlView extends View implements MouseListener {
+public class GlassControlView extends View {
 
     private JButton okButton = new JButton("OK");
     private JButton nokButton = new JButton("NOK");
@@ -134,6 +134,10 @@ public class GlassControlView extends View implements MouseListener {
         return (DefectCategory) categorySelector.getSelectedItem();
     }
 
+    public Defect selectedDefect() {
+        return defectList.getSelectedValue();
+    }
+
     public void initCategorySelector() {
         panel.add(categorySelector);
         categorySelector.setBounds(50, 50, 150, 30);
@@ -180,35 +184,9 @@ public class GlassControlView extends View implements MouseListener {
         modelName.addKeyListener(keyListener);
     }
 
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println("Click on glass control");
+    public void addGlassPanelClickAction(MouseListener mouseListener) {
+        glassPanel.addMouseListener(mouseListener);
     }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-
-
-
 }
 
 

@@ -8,8 +8,7 @@ public class GlassDefectView extends Rectangle {
 
     private Defect defect;
 
-    public GlassDefectView(int x, int y, int width, int height, Defect defect) {
-        super(x, y, width, height);
+    public GlassDefectView( Defect defect) {
         this.defect = defect;
     }
 }

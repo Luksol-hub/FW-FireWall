@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
    public abstract class GlassPanel extends JPanel implements MouseListener {
-        private List<GlassDefectView> circles = new ArrayList<>();
+        private List<Rectangle> circles = new ArrayList<>();
         private JFrame motherComponent;
         private boolean enabled;
 
@@ -53,12 +53,16 @@ import java.util.List;
             counter++;
             System.out.println("CLICK!" + counter);
 
-            Rectangle circle = new GlassDefectView(e.getX()-5, e.getY()-5, 10, 10, );
+            Rectangle circle = new Rectangle(e.getX()-5, e.getY()-5, 10, 10 );
             setBackground(Color.RED);
             circles.add(circle);
             repaint();
             motherComponent.repaint();
         }
+
+       public void addDefect(MouseEvent e, GlassDefectView glassDefectView) {
+        //nie działa jeśli tu przeniesiemy reakcje na click
+       }
 
        @Override
        public void setEnabled(boolean enabled) {
@@ -94,6 +98,5 @@ import java.util.List;
        public void setMotherComponent(JFrame motherComponent) {
            this.motherComponent = motherComponent;
        }
-
 
    }
