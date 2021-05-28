@@ -36,7 +36,7 @@ public class ViewFactory {
 
         GlassPanel glassPanel = createGlassView(glassType);
         GlassControlView view = new GlassControlView(glassPanel);
-        glassPanel.setMotherComponent(view);
+        glassPanel.setGlassControlView(view);
         GlassControlController glassControlController = new GlassControlController(view, this, glassPanel, defectRepository);
     }
 

@@ -1,102 +1,84 @@
 package view;
 
+import defects.Defect;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
-   public abstract class GlassPanel extends JPanel implements MouseListener {
-        private List<Rectangle> circles = new ArrayList<>();
-        private JFrame motherComponent;
-        private boolean enabled;
+public abstract class GlassPanel extends JPanel implements MouseListener {
+    private Deque<GlassDefectView> defectViews = new LinkedList<>();
+    private GlassControlView glassControlView;
+    private boolean enabled;
 
-        public GlassPanel() {
-            setSize(800,800);
-            addMouseListener(this);
+    public GlassPanel() {
+        setSize(800, 800);
+        addMouseListener(this);
+    }
 
+    abstract void paintGlass(Graphics g);
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillRect(250, 50, 300, 300);
+        g.setColor(Color.BLACK);
+        paintGlass(g);
+        g.setColor(Color.BLUE);
+        g.drawRect(300, 115, 200, 170);
+        g.setColor(Color.RED);
+
+        for (Rectangle circle : defectViews) {
+            g.drawOval((int) circle.getX(), (int) circle.getY(), (int) circle.getWidth(), (int) circle.getHeight());
         }
+    }
 
-       abstract void paintGlass(Graphics g);
-
-   /* @Override
-    protected void paintComponent(Graphics g) {
-        g.drawRect(50, 50, 100, 100);
-
-        System.out.println("MALUJEMY");
-    }*/
-
-        @Override
-        public void paintComponent(Graphics g) {
-            g.setColor(Color.GREEN);
-            g.fillRect(250,50,300, 300);
-            g.setColor(Color.BLACK);
-            paintGlass(g);
-            g.setColor(Color.BLUE);
-            g.drawRect(300, 115, 200, 170);
-            g.setColor(Color.RED);
-
-            for (Rectangle circle : circles) {
-                g.drawOval((int)circle.getX(),(int)circle.getY(),(int)circle.getWidth(),(int)circle.getHeight());
-            }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (!enabled) {
+            return;
         }
+        Defect defect = glassControlView.selectedDefect();
+        GlassDefectView glassDefectView = new GlassDefectView(e.getX() - 5, e.getY() - 5, 10, 10,defect);
+        defectViews.add(glassDefectView);
+        repaint();
+        glassControlView.repaint();
+    }
 
-        int counter = 0;
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
-        @Override
-        public void mouseClicked(MouseEvent e) {
+    @Override
+    public void mousePressed(MouseEvent e) {
 
-            if(!enabled){
-                return;
-            }
-            counter++;
-            System.out.println("CLICK!" + counter);
+    }
 
-            Rectangle circle = new Rectangle(e.getX()-5, e.getY()-5, 10, 10 );
-            setBackground(Color.RED);
-            circles.add(circle);
-            repaint();
-            motherComponent.repaint();
-        }
+    @Override
+    public void mouseReleased(MouseEvent e) {
 
-       public void addDefect(MouseEvent e, GlassDefectView glassDefectView) {
-        //nie działa jeśli tu przeniesiemy reakcje na click
-       }
+    }
 
-       @Override
-       public void setEnabled(boolean enabled) {
-           this.enabled = enabled;
-       }
+    @Override
+    public void mouseEntered(MouseEvent e) {
 
-       @Override
-        public void mousePressed(MouseEvent e) {
+    }
 
-        }
+    @Override
+    public void mouseExited(MouseEvent e) {
 
-        @Override
-        public void mouseReleased(MouseEvent e) {
+    }
 
-        }
+    public void setGlassControlView(GlassControlView glassControlView) {
+        this.glassControlView = glassControlView;
+    }
 
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-
-/*    @Override
-    protected void paintChildren(Graphics g) {
-        g.drawRect(50, 50, 100, 100);
-        System.out.println("MALUJEMY3");
-    }*/
-
-       public void setMotherComponent(JFrame motherComponent) {
-           this.motherComponent = motherComponent;
-       }
-
-   }
+    public void back() {
+        defectViews.pollLast();
+        repaint();
+        glassControlView.repaint();
+    }
+}

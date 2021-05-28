@@ -28,10 +28,6 @@ public class  TestView extends JFrame {
        // panel.setBounds(300,150,300,300);
         panel.repaint();
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater( ()->  new TestView());
-    }
 }
 
 class GraphicPanel extends JPanel implements MouseListener{

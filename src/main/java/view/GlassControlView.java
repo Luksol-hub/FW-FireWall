@@ -14,9 +14,8 @@ public class GlassControlView extends View {
 
     private JButton okButton = new JButton("OK");
     private JButton nokButton = new JButton("NOK");
-    private JButton repairButton = new JButton("Przeróbka");
-    private JButton backButton = new JButton("Cofnij");
-//    private Color c = Color.BLUE;
+    private JButton back = new JButton("Cofnij");
+    private JButton menu = new JButton("Menu");
 
     private DefaultListModel<Defect> defects = new DefaultListModel<>();
     private JComboBox<DefectCategory> categorySelector = new JComboBox<>(DefectCategory.values());
@@ -48,14 +47,12 @@ public class GlassControlView extends View {
         initCategorySelector();
         comboBoxTest();
         initGlassView();
-
     }
 
     private void initGoodGlass() {
         panel.add(okButton);
         okButton.setBounds(450, 420, 100, 100);
         okButton.repaint();
-
     }
 
     private void initDamageGlassButton() {
@@ -65,33 +62,21 @@ public class GlassControlView extends View {
     }
 
     private void initProcessingButton() {
-        panel.add(repairButton);
-        repairButton.setBounds(250, 420, 100, 100);
-        repairButton.repaint();
+        panel.add(back);
+        back.setBounds(250, 420, 100, 100);
+        back.repaint();
     }
 
     private void initBackButton() {
-        panel.add(backButton);
-        backButton.setBounds(50, 420, 100, 100);
-        backButton.repaint();
+        panel.add(menu);
+        menu.setBounds(50, 420, 100, 100);
+        menu.repaint();
     }
 
     public void initGlassView()  {
-
         panel.add(glassPanel);
-//        panel.add(new GlassPanelRl(this));
         glassPanel.setBounds(0,0, 600,600);
-
-       // panel.repaint();
     }
-
-//    public void initDefectPoint() {
-//        panel.add(glassPanel);
-//        glassPanel.setBounds(300, 115, 200, 170);
-////        defectPointView.setBackground(c);
-//
-//        panel.repaint();
-//    }
 
     private void initList() {
 
@@ -130,6 +115,7 @@ public class GlassControlView extends View {
             }
         });
     }
+
     public DefectCategory selectedCategory() {
         return (DefectCategory) categorySelector.getSelectedItem();
     }
@@ -163,13 +149,13 @@ public class GlassControlView extends View {
         nokButton.addActionListener(actionListener);
     }
 
-    public void addActionRepair(ActionListener actionListener) {
+    public void addActionBack(ActionListener actionListener) {
         System.out.println("przeróbka");
-        repairButton.addActionListener(actionListener);
+        back.addActionListener(actionListener);
     }
 
-    public void addActionBack(ActionListener actionListener) {
-        backButton.addActionListener(actionListener);
+    public void addActionMenu(ActionListener actionListener) {
+        menu.addActionListener(actionListener);
     }
 
     public void addActionSelection(ActionListener actionListener5) {
@@ -184,9 +170,6 @@ public class GlassControlView extends View {
         modelName.addKeyListener(keyListener);
     }
 
-    public void addGlassPanelClickAction(MouseListener mouseListener) {
-        glassPanel.addMouseListener(mouseListener);
-    }
 }
 
 

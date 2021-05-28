@@ -3,7 +3,6 @@ package controller;
 import defects.DefectCategory;
 import defects.DefectRepository;
 import view.GlassControlView;
-import view.GlassDefectView;
 import view.GlassPanel;
 import view.ViewFactory;
 
@@ -43,13 +42,13 @@ public class GlassControlController {
         ActionListener actionListener3 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                actionRepair();
+                actionBack();
             }
         };
         ActionListener actionListener4 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                actionBack();
+                actionMenu();
             }
         };
         ActionListener actionListener5 = new ActionListener(){
@@ -81,42 +80,13 @@ public class GlassControlController {
             }
         };
 
-        MouseListener mouseListener = new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                glassPanelClickAction(e);
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        };
-
         glassControlView.addActionOk(actionListener);
         glassControlView.addActionNok(actionListener2);
-        glassControlView.addActionRepair(actionListener3);
-        glassControlView.addActionBack(actionListener4);
+        glassControlView.addActionBack(actionListener3);
+        glassControlView.addActionMenu(actionListener4);
         glassControlView.addActionSelection(actionListener5);
         glassControlView.addTypeModelAction(keyListener);
         glassControlView.addActionSelectedDefect(listSelectionListener);
-        glassControlView.addGlassPanelClickAction(mouseListener);
-
     }
 
     public void actionOk() {
@@ -125,9 +95,11 @@ public class GlassControlController {
 
     public void actionNok() { System.out.println("NOK");}
 
-    public void actionRepair() { System.out.println("Przeróbka");}
-
     public void actionBack() {
+        glassPanel.back();
+    }
+
+    public void actionMenu() {
             glassControlView.dispose();
             viewFactory.createWindowSelection();
     }
@@ -138,15 +110,10 @@ public class GlassControlController {
 
     public void updateDefects(DefectCategory category) {
         glassControlView.setDefects(defectRepository.findDefectsByCategory(category));
-//        glassControlView.setDefects(defectRepository.getDefects());
     }
     public void actionDefectSelected() {
         glassPanel.setEnabled(true);
     }
 
-    public void glassPanelClickAction(MouseEvent e) {
-        GlassDefectView glassDefectView = new GlassDefectView(glassControlView.selectedDefect());
-        glassPanel.addDefect(e,glassDefectView);
-        System.out.println("click controller");
-    }
+
 }
