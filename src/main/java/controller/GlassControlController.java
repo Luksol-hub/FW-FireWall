@@ -2,13 +2,16 @@ package controller;
 
 import defects.DefectCategory;
 import defects.DefectRepository;
+import defects.GlassDefect;
 import view.GlassControlView;
+import view.GlassDefectView;
 import view.GlassPanel;
 import view.ViewFactory;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
+import java.util.Deque;
 
 public class GlassControlController {
     private GlassControlView glassControlView;
@@ -90,7 +93,13 @@ public class GlassControlController {
     }
 
     public void actionOk() {
-
+        Deque<GlassDefectView> defectViews = glassPanel.getDefectViews();
+        for (GlassDefectView glassDefectView : defectViews) {
+            GlassDefect glassDefect = new GlassDefect(glassDefectView.getDefect(), glassDefectView.getSection() );
+            System.out.println(glassDefect);
+            System.out.println(glassDefectView);
+            // todo dodać do glassdefectrepository
+        }
     }
 
     public void actionNok() { System.out.println("NOK");}

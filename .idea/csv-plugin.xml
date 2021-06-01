@@ -108,6 +108,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\main\java\view\GlassPanel.java">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\src\main\java\view\GlassView.java">
           <value>
             <Attribute>

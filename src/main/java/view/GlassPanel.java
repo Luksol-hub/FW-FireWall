@@ -12,6 +12,10 @@ public abstract class GlassPanel extends JPanel implements MouseListener {
     private Deque<GlassDefectView> defectViews = new LinkedList<>();
     private GlassControlView glassControlView;
     private boolean enabled;
+    public static final int X_POSITION = 300;
+    public static final int Y_POSITION = 115;
+    public static final int WIDTH = 200;
+    public static final int HEIGHT = 170;
 
     public GlassPanel() {
         setSize(800, 800);
@@ -27,7 +31,7 @@ public abstract class GlassPanel extends JPanel implements MouseListener {
         g.setColor(Color.BLACK);
         paintGlass(g);
         g.setColor(Color.BLUE);
-        g.drawRect(300, 115, 200, 170);
+        g.drawRect(X_POSITION, Y_POSITION, WIDTH, HEIGHT);
         g.setColor(Color.RED);
 
         for (Rectangle circle : defectViews) {
@@ -80,5 +84,8 @@ public abstract class GlassPanel extends JPanel implements MouseListener {
         defectViews.pollLast();
         repaint();
         glassControlView.repaint();
+    }
+    public Deque<GlassDefectView> getDefectViews() {
+        return defectViews;
     }
 }

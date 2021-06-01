@@ -17,5 +17,6 @@ public class GlassDefect {
                 ", section=" + section +
                 '}';
     }
+
 }
 
