@@ -11,7 +11,9 @@ import view.ViewFactory;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class GlassControlController {
     private GlassControlView glassControlView;
@@ -96,10 +98,12 @@ public class GlassControlController {
         Deque<GlassDefectView> defectViews = glassPanel.getDefectViews();
         for (GlassDefectView glassDefectView : defectViews) {
             GlassDefect glassDefect = new GlassDefect(glassDefectView.getDefect(), glassDefectView.getSection() );
+            List<GlassDefect> defectsToSave = new ArrayList<>();
+            defectsToSave.add(glassDefect);
             System.out.println(glassDefect);
             System.out.println(glassDefectView);
-            // todo dodać do glassdefectrepository
         }
+
     }
 
     public void actionNok() { System.out.println("NOK");}
