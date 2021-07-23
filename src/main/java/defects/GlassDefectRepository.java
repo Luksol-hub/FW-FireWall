@@ -16,10 +16,6 @@ public class GlassDefectRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public void addDefect(SimpleDefect simpleDefect) {
-
-    }
-
     public List<Defect> getDefects() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -44,10 +40,10 @@ public class GlassDefectRepository {
         return defects;
     }
 
-    public void addDefects(List<Defect> defects) {
+    public void addDefects(List<GlassDefect> defects) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        for (Defect defect : defects) {
+        for (GlassDefect defect : defects) {
             session.save(defect);
         }
         transaction.commit();

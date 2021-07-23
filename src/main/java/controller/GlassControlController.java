@@ -1,8 +1,6 @@
 package controller;
 
-import defects.DefectCategory;
-import defects.DefectRepository;
-import defects.GlassDefect;
+import defects.*;
 import view.GlassControlView;
 import view.GlassDefectView;
 import view.GlassPanel;
@@ -20,13 +18,18 @@ public class GlassControlController {
     private ViewFactory viewFactory;
     private GlassPanel glassPanel; // todo poprawić nazwy
     private DefectRepository defectRepository;
+    private GlassRepository glassRepository;
+    private GlassDefectRepository glassDefectRepository;
 
-    public GlassControlController(GlassControlView glassControlView, ViewFactory viewFactory, GlassPanel glassPanel, DefectRepository defectRepository) {
+    public GlassControlController(GlassControlView glassControlView, ViewFactory viewFactory, GlassPanel glassPanel, DefectRepository defectRepository, GlassRepository glassRepository, GlassDefectRepository glassDefectRepository) {
         this.glassControlView = glassControlView;
         this.viewFactory = viewFactory;
         this.glassPanel = glassPanel;
         this.defectRepository = defectRepository;
-        this.glassControlView.lockDefectSelection();
+        this.glassRepository = glassRepository;
+        this.glassDefectRepository = glassDefectRepository;
+        glassControlView.lockDefectSelection();
+        glassControlView.lockOkButtons();
         glassPanel.setEnabled(false);
         addActions();
         updateDefects(DefectCategory.FLOAT);
@@ -95,20 +98,16 @@ public class GlassControlController {
     }
 
     public void actionOk() {
-        Deque<GlassDefectView> defectViews = glassPanel.getDefectViews();
-        for (GlassDefectView glassDefectView : defectViews) {
-            GlassDefect glassDefect = new GlassDefect(glassDefectView.getDefect(), glassDefectView.getSection() );
-            List<GlassDefect> defectsToSave = new ArrayList<>();
-            defectsToSave.add(glassDefect);
-            System.out.println(glassDefect);
-            System.out.println(glassDefectView);
-        }
-
+        addGlass(true);
     }
 
-    public void actionNok() { System.out.println("NOK");}
+    public void actionNok() {
+        addGlass(false);
+    }
+
 
     public void actionBack() {
+
         glassPanel.back();
     }
 
@@ -119,6 +118,7 @@ public class GlassControlController {
 
     public void typeModelAction() {
         glassControlView.unlockDefectSelection();
+        glassControlView.unlockOkButtons();
     }
 
     public void updateDefects(DefectCategory category) {
@@ -128,5 +128,16 @@ public class GlassControlController {
         glassPanel.setEnabled(true);
     }
 
+    public void addGlass(boolean ok) {
+        Deque<GlassDefectView> defectViews = glassPanel.getDefectViews();
+        List<GlassDefect> defectsToSave = new ArrayList<>();
+        for (GlassDefectView glassDefectView : defectViews) {
+            GlassDefect glassDefect = new GlassDefect(glassDefectView.getDefect(), glassDefectView.getSection() );
+            defectsToSave.add(glassDefect);
+        }
+        glassDefectRepository.addDefects(defectsToSave);
+        Glass glass = new Glass(defectsToSave,glassControlView.getModelName(),glassControlView.getGlassType(), ok);
+        glassRepository.addGlass(glass);
 
+    }
 }

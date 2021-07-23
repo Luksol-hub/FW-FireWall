@@ -15,5 +15,7 @@
 <!--        <property name="hibernate.hbm2ddl.auto">create-drop</property>  do testow - kasuje po zaknieciu factory-->
         <mapping class="defects.SimpleDefect" />
         <mapping class="defects.Defect" />
+        <mapping class="defects.Glass" />
+        <mapping class="defects.GlassDefect" />
     </session-factory>
 </hibernate-configuration>

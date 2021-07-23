@@ -1,5 +1,7 @@
 package view;
 
+import defects.GlassType;
+
 import java.awt.*;
 
 public class GlassPanelWs extends GlassPanel {
@@ -12,5 +14,10 @@ public class GlassPanelWs extends GlassPanel {
         Polygon polygon = new Polygon(xPionts,yPionts,4);
         g.fillPolygon(polygon);
 
+    }
+
+    @Override
+    public GlassType getType() {
+        return GlassType.WS;
     }
 }

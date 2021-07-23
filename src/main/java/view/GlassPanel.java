@@ -1,6 +1,8 @@
 package view;
 
 import defects.Defect;
+import defects.GlassType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -88,4 +90,6 @@ public abstract class GlassPanel extends JPanel implements MouseListener {
     public Deque<GlassDefectView> getDefectViews() {
         return defectViews;
     }
+
+    public abstract GlassType getType();
 }

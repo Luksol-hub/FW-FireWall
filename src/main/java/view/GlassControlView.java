@@ -2,6 +2,7 @@ package view;
 
 import defects.Defect;
 import defects.DefectCategory;
+import defects.GlassType;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -139,6 +140,16 @@ public class GlassControlView extends View {
         defectList.setEnabled(true);
     }
 
+    public void lockOkButtons() {
+        okButton.setEnabled(false);
+        nokButton.setEnabled(false);
+    }
+
+    public void unlockOkButtons() {
+        okButton.setEnabled(true);
+        nokButton.setEnabled(true);
+    }
+
     public void addActionOk(ActionListener actionListener) {
         System.out.println("Add");
         okButton.addActionListener(actionListener);
@@ -170,7 +181,13 @@ public class GlassControlView extends View {
         modelName.addKeyListener(keyListener);
     }
 
+    public String getModelName() {
+        return modelName.getText();
+    }
 
+    public GlassType getGlassType() {
+        return glassPanel.getType();
+    }
 
 }
 
