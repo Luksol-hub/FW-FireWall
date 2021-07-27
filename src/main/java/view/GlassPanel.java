@@ -87,6 +87,12 @@ public abstract class GlassPanel extends JPanel implements MouseListener {
         repaint();
         glassControlView.repaint();
     }
+
+    public void deleteAll() {
+        defectViews.clear();
+        repaint();
+        glassControlView.repaint();
+    }
     public Deque<GlassDefectView> getDefectViews() {
         return defectViews;
     }

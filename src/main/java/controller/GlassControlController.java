@@ -28,9 +28,7 @@ public class GlassControlController {
         this.defectRepository = defectRepository;
         this.glassRepository = glassRepository;
         this.glassDefectRepository = glassDefectRepository;
-        glassControlView.lockDefectSelection();
-        glassControlView.lockOkButtons();
-        glassPanel.setEnabled(false);
+        glassControlView.resetView();
         addActions();
         updateDefects(DefectCategory.FLOAT);
     }
@@ -119,6 +117,9 @@ public class GlassControlController {
     public void typeModelAction() {
         glassControlView.unlockDefectSelection();
         glassControlView.unlockOkButtons();
+        if (glassControlView.selectedDefect() != null) {
+            actionDefectSelected();
+        }
     }
 
     public void updateDefects(DefectCategory category) {
@@ -138,6 +139,6 @@ public class GlassControlController {
         glassDefectRepository.addDefects(defectsToSave);
         Glass glass = new Glass(defectsToSave,glassControlView.getModelName(),glassControlView.getGlassType(), ok);
         glassRepository.addGlass(glass);
-
+        glassControlView.resetView();
     }
 }

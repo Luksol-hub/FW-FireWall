@@ -189,6 +189,17 @@ public class GlassControlView extends View {
         return glassPanel.getType();
     }
 
+
+
+    public void resetView() {
+        modelName.setText("");
+        lockDefectSelection();
+        lockOkButtons();
+        glassPanel.setEnabled(false);
+        glassPanel.deleteAll();
+    }
+
+
 }
 
 
