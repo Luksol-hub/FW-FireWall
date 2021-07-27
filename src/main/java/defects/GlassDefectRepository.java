@@ -12,7 +12,7 @@ public class GlassDefectRepository {
 
     private SessionFactory sessionFactory;
 
-    public GlassDefectRepository (SessionFactory sessionFactory) {
+    public GlassDefectRepository(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -59,8 +59,7 @@ public class GlassDefectRepository {
 
         long row = 0;
 
-        for(Iterator it = query.iterate(); it.hasNext();)
-        {
+        for (Iterator it = query.iterate(); it.hasNext(); ) {
             row = (Long) it.next();
             System.out.print("Count: " + row);
         }
@@ -70,5 +69,13 @@ public class GlassDefectRepository {
             return false;
         }
         return true;
+    }
+
+    public void delete(GlassDefect defect) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(defect);
+        transaction.commit();
+        session.close();
     }
 }

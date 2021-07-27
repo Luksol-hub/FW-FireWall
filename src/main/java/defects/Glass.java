@@ -36,4 +36,12 @@ public class Glass {
                 ", glassType=" + glassType +
                 '}';
     }
+
+    public String getModel() {
+        return model;
+    }
+
+    public List<GlassDefect> getDefects() {
+        return defects;
+    }
 }

@@ -20,4 +20,12 @@ public class GlassRepository {
         transaction.commit();
         session.close();
     }
+
+    public void deleteGlass(Glass glass) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(glass);
+        transaction.commit();
+        session.close();
+    }
 }

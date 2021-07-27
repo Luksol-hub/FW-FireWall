@@ -6,6 +6,7 @@ import view.GlassDefectView;
 import view.GlassPanel;
 import view.ViewFactory;
 
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
@@ -20,6 +21,7 @@ public class GlassControlController {
     private DefectRepository defectRepository;
     private GlassRepository glassRepository;
     private GlassDefectRepository glassDefectRepository;
+    private Glass lastGlass;
 
     public GlassControlController(GlassControlView glassControlView, ViewFactory viewFactory, GlassPanel glassPanel, DefectRepository defectRepository, GlassRepository glassRepository, GlassDefectRepository glassDefectRepository) {
         this.glassControlView = glassControlView;
@@ -48,7 +50,7 @@ public class GlassControlController {
         ActionListener actionListener3 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                actionBack();
+                actionBackDefect();
             }
         };
         ActionListener actionListener4 = new ActionListener(){
@@ -61,6 +63,12 @@ public class GlassControlController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateDefects(glassControlView.selectedCategory());
+            }
+        };
+        ActionListener actionListener6 = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actionBackGlass();
             }
         };
         KeyListener keyListener = new KeyListener() {
@@ -88,9 +96,10 @@ public class GlassControlController {
 
         glassControlView.addActionOk(actionListener);
         glassControlView.addActionNok(actionListener2);
-        glassControlView.addActionBack(actionListener3);
+        glassControlView.addActionBackDefect(actionListener3);
         glassControlView.addActionMenu(actionListener4);
         glassControlView.addActionSelection(actionListener5);
+        glassControlView.addActionBackGlass(actionListener6);
         glassControlView.addTypeModelAction(keyListener);
         glassControlView.addActionSelectedDefect(listSelectionListener);
     }
@@ -104,9 +113,20 @@ public class GlassControlController {
     }
 
 
-    public void actionBack() {
-
+    public void actionBackDefect() {
         glassPanel.back();
+    }
+    public void actionBackGlass() {
+        if(lastGlass!=null){
+            glassRepository.deleteGlass(lastGlass);
+            for (GlassDefect defect : lastGlass.getDefects()) {
+                glassDefectRepository.delete(defect);
+            }
+            JOptionPane.showMessageDialog(glassControlView, "usunięto szybę model: " + lastGlass.getModel());
+            lastGlass = null;
+        }else{
+            JOptionPane.showMessageDialog(glassControlView,"Nie usunięto szyby");
+        }
     }
 
     public void actionMenu() {
@@ -140,5 +160,6 @@ public class GlassControlController {
         Glass glass = new Glass(defectsToSave,glassControlView.getModelName(),glassControlView.getGlassType(), ok);
         glassRepository.addGlass(glass);
         glassControlView.resetView();
+        lastGlass = glass;
     }
 }

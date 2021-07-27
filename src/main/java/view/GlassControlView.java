@@ -15,8 +15,9 @@ public class GlassControlView extends View {
 
     private JButton okButton = new JButton("OK");
     private JButton nokButton = new JButton("NOK");
-    private JButton back = new JButton("Cofnij");
+    private JButton backDefect = new JButton("<html><center>"+"Cofnij"+"<br>"+"wade"+"</center></html>");
     private JButton menu = new JButton("Menu");
+    private JButton backGlass = new JButton("<html><center>"+"Cofnij"+"<br>"+"szybe"+"</center></html>");
 
     private DefaultListModel<Defect> defects = new DefaultListModel<>();
     private JComboBox<DefectCategory> categorySelector = new JComboBox<>(DefectCategory.values());
@@ -42,8 +43,9 @@ public class GlassControlView extends View {
         initNotification();
         initGoodGlass();
         initDamageGlassButton();
-        initProcessingButton();
-        initBackButton();
+        initBackGlassButton();
+        initBackDefectButton();
+        initMenuButton();
         initList();
         initCategorySelector();
         comboBoxTest();
@@ -62,13 +64,19 @@ public class GlassControlView extends View {
         nokButton.repaint();
     }
 
-    private void initProcessingButton() {
-        panel.add(back);
-        back.setBounds(250, 420, 100, 100);
-        back.repaint();
+    private void initBackDefectButton() {
+        panel.add(backDefect);
+        backDefect.setBounds(250, 420, 100, 100);
+        backDefect.repaint();
     }
 
-    private void initBackButton() {
+    private void initBackGlassButton() {
+        panel.add(backGlass);
+        backGlass.setBounds(150, 420, 100, 100);
+        backGlass.repaint();
+    }
+
+    private void initMenuButton() {
         panel.add(menu);
         menu.setBounds(50, 420, 100, 100);
         menu.repaint();
@@ -151,22 +159,23 @@ public class GlassControlView extends View {
     }
 
     public void addActionOk(ActionListener actionListener) {
-        System.out.println("Add");
         okButton.addActionListener(actionListener);
     }
 
     public void addActionNok(ActionListener actionListener) {
-        System.out.println("Nok");
         nokButton.addActionListener(actionListener);
     }
 
-    public void addActionBack(ActionListener actionListener) {
-        System.out.println("przeróbka");
-        back.addActionListener(actionListener);
+    public void addActionBackDefect(ActionListener actionListener) {
+        backDefect.addActionListener(actionListener);
     }
 
     public void addActionMenu(ActionListener actionListener) {
         menu.addActionListener(actionListener);
+    }
+
+    public void addActionBackGlass(ActionListener actionListener) {
+        backGlass.addActionListener(actionListener);
     }
 
     public void addActionSelection(ActionListener actionListener5) {
