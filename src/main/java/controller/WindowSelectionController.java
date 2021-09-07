@@ -17,19 +17,8 @@ public class WindowSelectionController {
         addActions();
     }
     private void addActions() {
-        ActionListener actionListener = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actionWindScreen();
-            }
-        };
-
-        ActionListener actionListener2 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actionRoofLight();
-            }
-        };
+        ActionListener actionListener = e -> actionWindScreen();
+        ActionListener actionListener2 = e -> actionRoofLight();
 
         windowSelectionView.addActionWindScreen(actionListener);
         windowSelectionView.addActionRooflight(actionListener2);

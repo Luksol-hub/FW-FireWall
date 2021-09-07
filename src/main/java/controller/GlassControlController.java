@@ -35,42 +35,12 @@ public class GlassControlController {
         updateDefects(DefectCategory.FLOAT);
     }
     private void addActions() {
-        ActionListener actionListener = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               actionOk();
-            }
-        };
-        ActionListener actionListener2 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actionNok();
-            }
-        };
-        ActionListener actionListener3 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actionBackDefect();
-            }
-        };
-        ActionListener actionListener4 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actionMenu();
-            }
-        };
-        ActionListener actionListener5 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateDefects(glassControlView.selectedCategory());
-            }
-        };
-        ActionListener actionListener6 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actionBackGlass();
-            }
-        };
+        ActionListener actionListener = e -> actionOk();
+        ActionListener actionListener2 = e -> actionNok();
+        ActionListener actionListener3 = e -> actionBackDefect();
+        ActionListener actionListener4 = e -> actionMenu();
+        ActionListener actionListener5 = e -> updateDefects(glassControlView.selectedCategory());
+        ActionListener actionListener6 = e -> actionBackGlass();
         KeyListener keyListener = new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -87,12 +57,7 @@ public class GlassControlController {
 
             }
         };
-        ListSelectionListener listSelectionListener = new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                actionDefectSelected();
-            }
-        };
+        ListSelectionListener listSelectionListener = e -> actionDefectSelected();
 
         glassControlView.addActionOk(actionListener);
         glassControlView.addActionNok(actionListener2);
